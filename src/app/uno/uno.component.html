@@ -1,5 +1,9 @@
-<input type="text" [(ngModel)]="nombre">
-<input type="button" value="Boton" (click)="llamada(nombre)">
-
-<span> Resultado: </span>
-<span></span>
+<div class="container">
+    <input type="text" [(ngModel)]="idBuscado" autofocus>
+    <input type="button" value="Boton" (click)="buscarId()">
+    <div>
+         <span> Resultado: </span>
+        <span *ngIf="!fallo">{{uno.title}}</span>
+        <span *ngIf="fallo">No se ha encontrado nada</span>
+    </div>
+</div>
