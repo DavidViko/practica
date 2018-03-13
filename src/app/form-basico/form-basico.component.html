@@ -4,7 +4,7 @@
 <form [formGroup]= "formulario" (ngSubmit)="enviar($event)" novalidate>
   <input formControlName="nombre">
   <p class="text-danger" *ngIf="formulario.controls.nombre.invalid && formulario.controls.nombre.touched">
-    Error por.......
+    Error por........
   </p>
   <br>
   
