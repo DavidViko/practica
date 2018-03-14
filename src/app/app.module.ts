@@ -8,15 +8,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UnoComponent } from './uno/uno.component';
 import { FormBasicoComponent } from './form-basico/form-basico.component';
+import { CasaComponent } from './inmobiliaria/casa/casa.component';
 
 //Servicios
 import { ServicioService } from './providers/servicio.service';
+import { InmobiliariaComponent } from './inmobiliaria/inmobiliaria.component';
+import { CasasService } from './providers/casas.service';
+
+//Filtros
+import { FilterCasaPipe } from './pipes/filtroCasa';
 
 @NgModule({
   declarations: [
     AppComponent,
     UnoComponent,
-    FormBasicoComponent
+    FormBasicoComponent,
+    InmobiliariaComponent,
+    CasaComponent,
+    FilterCasaPipe
   ],
   imports: [
     BrowserModule,
@@ -26,7 +35,11 @@ import { ServicioService } from './providers/servicio.service';
   ],
   providers: [
     HttpClientModule,
-    ServicioService],
-    bootstrap: [AppComponent]
+    CasasService,
+    ServicioService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

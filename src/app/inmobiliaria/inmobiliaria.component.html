@@ -1,0 +1,46 @@
+<div id="inmo" class="row">
+  <div class="stock col-xs-12 col-sm-4">
+    <h2>Listado de casas</h2>
+    <section class="buscador" ng-controller="ExampleController">
+      <input [(ngModel)]="searchText" placeholder="Busca por nombre o direccion">
+      <a class="btn btn-primary" href="#">
+        <i class="fa fa-search"></i> Buscar</a>
+    </section>
+    <section>
+      <input type="checkbox" [(ngModel)]="alquiler"> Alquiler
+      <input type="checkbox" [(ngModel)]="venta"> Venta
+    </section>
+    <section>
+      <h4>Rango de Precios</h4>
+      <input type="text" [(ngModel)]="precioMin"> Mínimo
+      <input type="text" [(ngModel)]="precioMax"> Máximo
+    </section>
+    <div id="listado">
+
+
+      <div *ngFor="let casa of casas | filter: searchText: alquiler : venta : precioMin : precioMax">
+
+
+
+        <div class="listaCasas stock col-xs-12 col-sm-6" (click)="seleccionar($event,casa)">
+          <img src={{casa.foto}} alt="{{casa.nombre}}">
+          <span class="nombreCasa">{{casa.nombre}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-8">
+    <div class="panel panel-info">
+      <div class="panel-heading detalle-casa">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <!-- llamada a componente hijo -->
+        <app-casa [casa]="casaSelec"></app-casa>
+        <!-- <app-receta-detalle [r1]="recetaSelec"></app-receta-detalle>-->
+      </div>
+    </div>
+  </div>
+</div>
