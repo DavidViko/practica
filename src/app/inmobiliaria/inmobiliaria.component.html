@@ -3,8 +3,7 @@
     <h2>Listado de casas</h2>
     <section class="buscador" ng-controller="ExampleController">
       <input [(ngModel)]="searchText" placeholder="Busca por nombre o direccion">
-      <a class="btn btn-primary" href="#">
-        <i class="fa fa-search"></i> Buscar</a>
+      <a class="btn btn-primary" href="#"><i class="fa fa-search"></i></a>
     </section>
     <section>
       <input type="checkbox" [(ngModel)]="alquiler"> Alquiler
@@ -19,8 +18,6 @@
 
 
       <div *ngFor="let casa of casas | filter: searchText: alquiler : venta : precioMin : precioMax">
-
-
 
         <div class="listaCasas stock col-xs-12 col-sm-6" (click)="seleccionar($event,casa)">
           <img src={{casa.foto}} alt="{{casa.nombre}}">
@@ -39,7 +36,6 @@
       <div class="panel-body">
         <!-- llamada a componente hijo -->
         <app-casa [casa]="casaSelec"></app-casa>
-        <!-- <app-receta-detalle [r1]="recetaSelec"></app-receta-detalle>-->
       </div>
     </div>
   </div>
