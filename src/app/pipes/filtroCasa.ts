@@ -4,7 +4,7 @@ import { Casa } from '../model/casa';
     name: 'filter'
 })
 export class FilterCasaPipe implements PipeTransform {
-    precio :number;
+    precio: number;
     /**
      * 
      * @param recetas Array de recetas
@@ -23,24 +23,24 @@ export class FilterCasaPipe implements PipeTransform {
                     casasFilterArray.push(it);
                 }
             });
-        } else {
-            casasFilterArray = items;
         }
-
         if (venta) {
             items.forEach(it => {
                 if (!it.alquiler) {
                     casasFilterArray.push(it);
                 }
             });
-        } else {
+        }
+        if (alquiler && venta || !alquiler && !venta){
             casasFilterArray = items;
         }
-        if( this.precio < precioMin && this.precio > precioMax){
-            casasFilterArray.filter(it=>{
+
+        if (this.precio < precioMin && this.precio > precioMax) {
+            casasFilterArray.filter(it => {
 
             });
         }
+
         //De los que quedan, filtramos por texto si hay
         if (!searchText) {
             return casasFilterArray; // Si no hay texto se devuelve todo el array
