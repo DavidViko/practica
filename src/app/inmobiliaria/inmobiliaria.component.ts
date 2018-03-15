@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Casa } from '../model/casa';
 import { CasasService } from '../providers/casas.service';
 import { } from 'events';
@@ -11,32 +11,32 @@ import { } from 'events';
 export class InmobiliariaComponent implements OnInit {
   casas: Casa[];
   casaSelec: Casa;
-  alquier:boolean;
-  venta:boolean;
-  searchText:string;
-  precioMin:number;
-  precioMax:number;
-  @Output() eventoEmitir = new EventEmitter();
+  modo: string;
+  searchText: string;
+  precioMin: number;
+  precioMax: number;
 
   constructor(public casasService: CasasService) {
     console.log("Constructor Casas");
     this.casas = [];
     this.casaSelec = new Casa('', 0);
-    this.precioMin =0;
-    this.precioMax=0;
   }
 
   ngOnInit() {
     console.log('TodosComponent onInit');
-    this.cargarCasas();  
+    this.cargarCasas();
   }// final onInit
 
 
-  cargarCasas(){
+  cargarCasas() {
     this.casasService.getAll().subscribe(
       resultado => {
         console.debug('peticion correcta %o', resultado);
         this.mapeo(resultado);
+        this.casaSelec = this.casas[0] || new Casa('', 0);
+        this.modo = "0";
+        this.precioMax = 0;
+        this.precioMin = 0;
       },
       error => {
         console.warn('peticion incorrecta %o', error);
@@ -60,14 +60,11 @@ export class InmobiliariaComponent implements OnInit {
       this.casas.push(casa);
 
     });
-    this.casaSelec = this.casas[0];
   }// final mapeo
-
 
   seleccionar($event, casa: Casa) {
     this.casaSelec = casa;
     console.log("InmobiliariaComponent: Emitimos evento al Componente hijo %o", this.casaSelec);
-  
   }
 
 }

@@ -17,10 +17,16 @@ export class Casa {
         if (foto) {
             this.foto = foto;
         } else {
-            this.foto = 'assets/img/coche_default.jpg';
+            this.foto = '../assets/img/casa-default.jpg';
         };
         this.direccion = direccion;
-        this.servicios = (servicios) ? servicios : [];
+
+        // let servicio;
+        // this.servicios.forEach(el =>{
+
+        // });
+        this.servicios = servicios;
+        //this.servicios = (servicios) ? servicios : [];
     }
 
 }

@@ -1,32 +1,38 @@
+<p>Valores: {{casas | json}}</p>
+
 <div id="inmo" class="row">
-  <div class="stock col-xs-12 col-sm-4">
-    <h2>Listado de casas</h2>
-    <section class="buscador" ng-controller="ExampleController">
-      <input [(ngModel)]="searchText" placeholder="Busca por nombre o direccion">
-      <a class="btn btn-primary" href="#"><i class="fa fa-search"></i></a>
+  <div class="izda stock col-xs-12 col-sm-4">
+    <section class="buscador input-group">
+      <input [(ngModel)]="searchText" id="buscador" class="form-control" placeholder="Busca por nombre o direccion" aria-describedby="sizing-addon2"
+        autofocus>
+      <span class="input-group-addon btn btn-default" id="sizing-addon2">
+        <i class="fa fa-search"></i>
+      </span>
+
     </section>
     <section>
-      <input type="checkbox" [(ngModel)]="alquiler"> Alquiler
-      <input type="checkbox" [(ngModel)]="venta"> Venta
+      <input type="radio" [(ngModel)]="modo" value="0"> Todos
+      <input type="radio" [(ngModel)]="modo" value="1"> Venta
+      <input type="radio" [(ngModel)]="modo" value="2"> Alquiler
     </section>
-    <section>
+    <section class=rangoPrecios>
       <h4>Rango de Precios</h4>
-      <input type="text" [(ngModel)]="precioMin"> Mínimo
-      <input type="text" [(ngModel)]="precioMax"> Máximo
+      <label for="precioMin">Precio Mín.</label>
+      <input type="number" [(ngModel)]="precioMin" placeholder="0">
+      <label for="precioMax"> Max.</label>
+      <input type="number" [(ngModel)]="precioMax" placeholder="0">
     </section>
     <div id="listado">
-
-
-      <div *ngFor="let casa of casas | filter: searchText: alquiler : venta : precioMin : precioMax">
-
-        <div class="listaCasas stock col-xs-12 col-sm-6" (click)="seleccionar($event,casa)">
+      <h4>Listado de casas</h4>
+      <div *ngFor="let casa of casas | filter: searchText: modo : precioMin : precioMax" [class.active]="casa==casaSelec">
+        <div class="listaCasas stock col-xs-12 col-sm-5" (click)="seleccionar($event,casa)">
           <img src={{casa.foto}} alt="{{casa.nombre}}">
           <span class="nombreCasa">{{casa.nombre}}</span>
+          <span class="precioCasa">{{casa.precio}}€</span>
         </div>
       </div>
     </div>
   </div>
-
 
   <div class="col-xs-12 col-sm-8">
     <div class="panel panel-info">

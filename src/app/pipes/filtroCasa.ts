@@ -10,76 +10,59 @@ export class FilterCasaPipe implements PipeTransform {
      * @param recetas Array de recetas
      * @param searchText Texto de busqueda
      */
-    transform(items: Casa[], searchText: string, alquiler: boolean, venta: boolean, precioMin: number, precioMax: number): Casa[] {
+    transform(items: Casa[], searchText: string, modo:string, precioMin: number = 0, precioMax: number = 0): Casa[] {
 
+        console.log(`Modo ${modo} precioMin ${precioMin} preciomax ${precioMax}`);
         //si no hay recetas retornar vacio
         if (!items) return [];
 
         let casasFilterArray: Casa[] = [];
 
-        if (alquiler) {
-            items.forEach(it => {
-                if (it.alquiler) {
-                    casasFilterArray.push(it);
-                }
-            });
+        if (modo=="0"){
+            casasFilterArray = items;
         }
-        if (venta) {
+        if (modo=="1") {
             items.forEach(it => {
                 if (!it.alquiler) {
                     casasFilterArray.push(it);
                 }
             });
         }
-        if (alquiler && venta || !alquiler && !venta){
-            casasFilterArray = items;
-        }
 
-        if (this.precio < precioMin && this.precio > precioMax) {
-            casasFilterArray.filter(it => {
-
+        if (modo=="2") {
+            items.forEach(it => {
+                if (it.alquiler) {
+                    casasFilterArray.push(it);
+                }
             });
         }
 
-        //De los que quedan, filtramos por texto si hay
+        if (precioMin === 0 || precioMin === undefined){    
+        } else{
+            casasFilterArray.filter(it => {
+                return(it.precio>=precioMin)
+            });
+        } 
+
+        if (precioMax === 0 || precioMax === undefined){  
+        } else{
+            casasFilterArray.filter(it => {
+                return(it.precio<=precioMax)
+            });
+        } 
+
+        //De los que quedan, filtramos por texto (nombre y/o direccion)
         if (!searchText) {
             return casasFilterArray; // Si no hay texto se devuelve todo el array
         } else {
             searchText = searchText.toLowerCase();
-            let casa = '';
+            let busqueda = '';
             return casasFilterArray.filter(it => {
-                casa = it.nombre + it.direccion;
-                casa = casa.toLowerCase();
+                busqueda = it.nombre + it.direccion;
+                busqueda = busqueda.toLowerCase();
 
-                return casa.includes(searchText);
+                return busqueda.includes(searchText);
             });
         }
-
-        //   if (!searchText && isGlutenFree){
-        //     items.forEach( it =>{
-        //       if ( it.isGlutenFree ){
-        //         return it;
-        //       }
-        //     });
-        //   } 
-        //   searchText = searchText.toLowerCase();
-        //   //console.log(`filter isGlutenFree ${isGlutenFree}`);
-
-        //   let receta = '';
-        //   return items.filter(it => {
-
-        //     if (isGlutenFree) {
-        //       if (it.isGlutenFree) {
-        //         receta = it.nombre + it.ingredientes + it.cocinero;
-        //         receta = receta.toLowerCase();
-        //       }
-        //     } else {
-        //       receta = it.nombre + it.ingredientes + it.cocinero;
-        //       receta = receta.toLowerCase();
-        //     }
-        //     return receta.includes(searchText);
-        //   });
-        // }
-
     }
 }
