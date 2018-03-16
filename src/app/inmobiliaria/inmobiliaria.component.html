@@ -1,4 +1,4 @@
-<p>Valores: {{casas | json}}</p>
+<!-- <p>Valores: {{casaSelec | json}}</p> -->
 
 <div id="inmo" class="row">
   <div class="izda stock col-xs-12 col-sm-4">
@@ -11,9 +11,9 @@
 
     </section>
     <section>
-      <input type="radio" [(ngModel)]="modo" value="0"> Todos
-      <input type="radio" [(ngModel)]="modo" value="1"> Venta
-      <input type="radio" [(ngModel)]="modo" value="2"> Alquiler
+      <input type="radio" [(ngModel)]="modo" value="todos"> Todos
+      <input type="radio" [(ngModel)]="modo" value="venta"> Venta
+      <input type="radio" [(ngModel)]="modo" value="alquiler"> Alquiler
     </section>
     <section class=rangoPrecios>
       <h4>Rango de Precios</h4>
@@ -24,7 +24,7 @@
     </section>
     <div id="listado">
       <h4>Listado de casas</h4>
-      <div *ngFor="let casa of casas | filter: searchText: modo : precioMin : precioMax" [class.active]="casa==casaSelec">
+      <div *ngFor="let casa of casas | filterViviendas: searchText: modo : precioMin : precioMax" [class.active]="casa==casaSelec">
         <div class="listaCasas stock col-xs-12 col-sm-5" (click)="seleccionar($event,casa)">
           <img src={{casa.foto}} alt="{{casa.nombre}}">
           <span class="nombreCasa">{{casa.nombre}}</span>
@@ -41,7 +41,7 @@
       </div>
       <div class="panel-body">
         <!-- llamada a componente hijo -->
-        <app-casa [casa]="casaSelec"></app-casa>
+        <app-casa [casaParam]="casaSelec"></app-casa>
       </div>
     </div>
   </div>

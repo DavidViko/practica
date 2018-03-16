@@ -7,7 +7,7 @@ import { Casa } from '../../model/casa';
   styleUrls: ['./casa.component.scss']
 })
 export class CasaComponent implements OnInit {
-  @Input('casa') casa: Casa;
+  @Input('casaParam') casa: Casa;
 
   constructor() { 
     console.log ("Constructor casa.component");

@@ -10,23 +10,21 @@ export class Casa {
     direccion: string;
     servicios: Servicio[] = [];
 
-    constructor(nombre: string, precio: number, alquiler?: boolean, foto?: string, direccion?: string, servicios?: Servicio[]) {
+    constructor(nombre: string, precio: number, alquiler?: boolean, habitaciones?: number, foto?: string, direccion?: string, servicios?: Servicio[],id?:number) {
         this.nombre = nombre;
         this.precio = precio;
-        this.alquiler = alquiler;
-        if (foto) {
-            this.foto = foto;
-        } else {
-            this.foto = '../assets/img/casa-default.jpg';
-        };
-        this.direccion = direccion;
-
-        // let servicio;
-        // this.servicios.forEach(el =>{
-
-        // });
-        this.servicios = servicios;
-        //this.servicios = (servicios) ? servicios : [];
+        this.alquiler = alquiler ? alquiler : false;
+        this.habitaciones = habitaciones ? habitaciones : 0;
+        this.foto = foto ? foto : '../assets/img/casa-default.jpg';
+        this.direccion = direccion ? direccion : '';
+        this.servicios = [];
+        this.id = id ? id : -1;
+    }   
+        /**
+     * Añadir los servicios
+     */
+    addServicios( servicio: Servicio ) {
+        this.servicios.push(servicio);
     }
 
 }

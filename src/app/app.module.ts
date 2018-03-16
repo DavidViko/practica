@@ -17,6 +17,7 @@ import { CasasService } from './providers/casas.service';
 
 //Filtros
 import { FilterCasaPipe } from './pipes/filtroCasa';
+import { FilterViviendas } from './pipes/filtroViviendas';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FilterCasaPipe } from './pipes/filtroCasa';
     FormBasicoComponent,
     InmobiliariaComponent,
     CasaComponent,
-    FilterCasaPipe
+    FilterCasaPipe,
+    FilterViviendas
   ],
   imports: [
     BrowserModule,

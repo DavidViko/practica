@@ -12,6 +12,7 @@ img{
 }
 .cabecera{
     background-color: rgb(179, 182, 211);
+    padding:1%;
 }
 
 .nombre, .precio{
@@ -25,7 +26,8 @@ img{
 
 .servicios{
     border:1px solid #AAA;
-    margin:1%;
+    margin:2%;
+    margin-top:2%;
     padding:2%;
     clear:both;
 }
@@ -34,7 +36,7 @@ img{
     position: absolute;
     top:0;
     right:2%;
-    cursor:none;
+    cursor:default;
 
     display: inline-block;
     text-align: center;

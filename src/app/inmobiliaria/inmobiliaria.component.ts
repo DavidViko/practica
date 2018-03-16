@@ -33,8 +33,8 @@ export class InmobiliariaComponent implements OnInit {
       resultado => {
         console.debug('peticion correcta %o', resultado);
         this.mapeo(resultado);
-        this.casaSelec = this.casas[0] || new Casa('', 0);
-        this.modo = "0";
+        this.casaSelec = this.casas[0] || new Casa ('', 0);
+        this.modo = "todos";
         this.precioMax = 0;
         this.precioMin = 0;
       },
@@ -43,7 +43,8 @@ export class InmobiliariaComponent implements OnInit {
       }
 
     );//final subscribe   
-  }
+  } //final cargarCasas
+
   /**
    * Mapea los Datos en formato Json a TODO que proviene del Servicio Rest
    * @param resul 
@@ -57,6 +58,7 @@ export class InmobiliariaComponent implements OnInit {
       casa.habitaciones = element.habitaciones;
       casa.foto = element.foto;
       casa.direccion = element.direccion;
+      casa.servicios = element.servicios;
       this.casas.push(casa);
 
     });
